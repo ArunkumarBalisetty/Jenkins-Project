@@ -48,7 +48,7 @@ pipeline {
     stage('kubernetes deployment') {
       steps {
          script {
-           kubernetesDeploy (configs: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml', kubeconfigId: 'kubeconfig')
+           kubernetesDeploy configs: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml', credentialsType: 'Text', kubeConfig: [path: ''], kubeconfigId: 'kubernetesconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
             }
         }
     }
