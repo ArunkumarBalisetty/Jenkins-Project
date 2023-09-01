@@ -48,7 +48,7 @@ pipeline {
     stage('kubernetes deployment') {
       steps {
          script {
-           kubernetesDeploy (configs: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yaml',kubeconfigId: 'kubeconfig',enableConfigSubstitution: true)
+           kubernetesDeploy (configs: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml',kubeconfigId: 'kubeconfig',enableConfigSubstitution: true)
             }
         }
     }
