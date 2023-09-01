@@ -45,12 +45,25 @@ pipeline {
         }
       }
     }
-    stage('kubernetes deployment') {
-      steps {
-         script {
-           kubernetesDeploy (configs: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml',kubeconfigId: 'kubeconfig')
-            }
+    stage('SSH Into k8s Server') {
+      steps { 
+        script {
+          def remote = [:]
+          remote.name = 'K8S master'
+          remote.host = '65.1.85.31'
+          remote.user = 'ubuntu'
+          remote.password = 'ubuntu'
+          remote.allowAnyHosts = true
+
+          stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
+            sshPut remote: remote, from: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml', into: '.'
         }
+
+        stage('Deploy spring boot') {
+          sshCommand remote: remote, command: "kubectl apply -f deployment.yml"
+        }
+      }
+      }   
     }
   }
 }
