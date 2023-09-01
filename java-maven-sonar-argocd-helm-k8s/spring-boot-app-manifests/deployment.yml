@@ -1,7 +1,8 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
   name: spring-boot-app
+  namespace: default
 spec:
   selector:
     matchLabels:
@@ -26,7 +27,7 @@ apiVersion: v1 # Kubernetes API version
 kind: Service # Kubernetes resource kind we are creating
 metadata: # Metadata of the resource kind we are creating
   name: springboot-app-svc
-  namespace: test
+  namespace: default
 spec:
   selector:
     app: spring-boot-app
