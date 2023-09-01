@@ -56,12 +56,12 @@ pipeline {
           remote.allowAnyHosts = true
 
           stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
-            sshPut remote: remote, from: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml', into: '.'
+            sshPut remote: remote, from: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml', into: '/home/ubuntu/'
         }
 
-        stage('Deploy spring boot') {
-          sshCommand remote: remote, command: "kubectl apply -f deployment.yml"
-        }
+        // stage('Deploy spring boot') {
+          // sshCommand remote: remote, command: "kubectl apply -f deployment.yml"
+        // }
       }
       }   
     }
