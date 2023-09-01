@@ -49,7 +49,7 @@ pipeline {
       steps { 
         script {
           def remote = [:]
-          remote.name = 'K8S master'
+          remote.name = 'k8s-master'
           remote.host = '65.1.85.31'
           remote.user = 'ubuntu'
           remote.password = 'ubuntu'
