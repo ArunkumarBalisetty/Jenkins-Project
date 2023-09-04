@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://43.205.215.19:9000"
+        SONAR_URL = "http://3.111.246.103:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -45,11 +45,12 @@ pipeline {
         }
       }
     }
-    stage('Deploy to Kubernetes') {
-            steps {
-                // Deploy your application to Kubernetes
-                sh 'kubectl apply -f dep-def.yml '
+    stage('kubernetes deployment') {
+      steps {
+         script {
+           kubernetesDeploy (configs: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml', kubeconfigId: 'k8scluster')
             }
         }
+    }
   }
 }
