@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-app
-          image: arunkumar90322/ultimate-cicd:latest # Image that will be used to containers in the cluster
+          image: arunkumar90322/cicd-applicationimg:latest # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
