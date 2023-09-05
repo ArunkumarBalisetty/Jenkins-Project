@@ -45,6 +45,12 @@ pipeline {
         }
       }
     }
-    
+    stage('kubernetes deployment') {
+      steps {
+         script {
+           kubernetesDeploy (configs: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml', kubeconfigId: 'eks-k8s')
+            }
+        }
+    }
     }
   }
